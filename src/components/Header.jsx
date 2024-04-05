@@ -1,4 +1,10 @@
-export default function header({ cart, removeFromCart }) {
+export default function header({
+  cart,
+  removeFromCart,
+  increaseQuantity,
+  decreaseQuantity,
+  clearCart,
+}) {
   //state derivado
   //useMemo, state que agrega performance permitiendo que el codigo se ejecute, cuando este recién reciba un cambio, hay que colocar el codigo dinamico dentro de un array, en este caso cart
   const isEmpty = () => cart.length === 0;
@@ -59,6 +65,7 @@ export default function header({ cart, removeFromCart }) {
                                 <td className="fw-bold">${guitar.price}</td>
                                 <td className="flex align-items-start gap-4">
                                   <button
+                                    onClick={() => decreaseQuantity(guitar.id)}
                                     type="button"
                                     className="btn btn-dark"
                                   >
@@ -66,6 +73,7 @@ export default function header({ cart, removeFromCart }) {
                                   </button>
                                   {guitar.quantity}
                                   <button
+                                    onClick={() => increaseQuantity(guitar.id)}
                                     type="button"
                                     className="btn btn-dark"
                                   >
@@ -92,7 +100,10 @@ export default function header({ cart, removeFromCart }) {
                       </p>
                     </>
                   )}
-                  <button className="btn btn-dark w-100 mt-3 p-2">
+                  <button
+                    onClick={() => clearCart()}
+                    className="btn btn-dark w-100 mt-3 p-2"
+                  >
                     Vaciar Carrito
                   </button>
                 </div>
